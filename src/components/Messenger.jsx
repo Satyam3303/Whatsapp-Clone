@@ -4,7 +4,7 @@ import { AppBar, Toolbar, styled, Box } from "@mui/material";
 import { AccountContext } from "../context/AccountProvider";
 import LoginPage from "./account/LoginPage";
 
-import ChatDialog from "./chat/ChatDialg";
+import ChatDialog from "./chat/ChatDialog";
 
 const Box123 = styled(Box)`
     height:100vh;
