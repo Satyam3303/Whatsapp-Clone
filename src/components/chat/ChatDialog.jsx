@@ -25,7 +25,7 @@ const RightComponent = styled(Box)`
     width: 73%;
     min-width: 300px;
     Height: 100%;
-    border-left: 1px solid black;`
+    border-left: 1px solid #dcdcdc;`
     
 
 const ChatDialog = ()=>{

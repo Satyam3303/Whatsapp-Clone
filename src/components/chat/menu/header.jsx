@@ -1,9 +1,11 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import { AccountContext } from "../../../context/AccountProvider";
 import { Box, styled } from "@mui/material";
 
 import ChatIcon from '@mui/icons-material/Chat';
+
+import InfoDrawer from "../../drawer/infoDrawer";
 
 import HeaderMenu from "./HeaderMenu";
 
@@ -36,15 +38,24 @@ const Image = styled('img')({
 
 const Header = () =>{
 
+    const [openDrawer,setOpenDrawer] = useState(false);
+
+    const toggleDrawer = ()=>{
+        setOpenDrawer(true);
+    }
+
     const {account} = useContext(AccountContext);
     return(
+        <>
         <Component>
-            <Image src={account.picture} alt="nothing"/>
+            <Image src={account.picture} alt="nothing" onClick={()=> toggleDrawer()}/>
             <Parent>
                 <ChatIcon/>
-                <HeaderMenu/>
+                <HeaderMenu setOpenDrawer={setOpenDrawer}/>
             </Parent>
         </Component>
+        <InfoDrawer open={openDrawer} setOpen={setOpenDrawer}/>
+        </>
     )
 }
 
