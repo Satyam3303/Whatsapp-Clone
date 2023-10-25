@@ -7,6 +7,8 @@ import qrCode from '../../Assets/qrCode.png'
 
 import { AccountContext } from "../../context/AccountProvider";
 
+import { addUser } from "../../service/api";
+
 const Box1 = styled(Box)`
     display: flex;`
 
@@ -51,10 +53,11 @@ const LoginPage = ()=>{
 
     const {setAccount} = useContext(AccountContext);
 
-    const onLoginSuccess=(res)=>{
+    const onLoginSuccess= async(res)=>{
         var decoded = jwt_decode(res.credential);
         console.log(decoded);
         setAccount(decoded);
+        await addUser(decoded);
     }
 
     const onLoginError=(res)=>{
