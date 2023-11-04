@@ -1,9 +1,9 @@
-import { Box,Typography, styled } from "@mui/material";
+import { Box, Typography, styled } from "@mui/material";
 
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { AccountContext } from "../../../context/AccountProvider";
-import { setConversation } from "../../../service/api";
+import { setConversation, getConversation } from "../../../service/api";
 
 const Component = styled(Box)`
     display:flex;
@@ -18,9 +18,26 @@ const Image = styled('img')({
     padding:'0 14px',
 })
 
+const Container = styled (Box)`
+    display:flex;`
+
+const Text = styled(Typography)`
+    font-size: 14px;
+    color: rgba (0, 0, 0, 0.6);`
+
 const Conversation = ({user}) =>{
     
-    const {setPerson, account} = useContext(AccountContext);
+    const {setPerson, account, newMessageFlag} = useContext(AccountContext);
+
+    const [message, setMessage] = useState({});
+
+    useEffect(() => {
+            const getConservationDetails = async() =>{
+                const data = await getConversation({senderId: account.sub, receiverId: user.sub});
+                setMessage({text: data?.message, timestame: data?.updatedAt})
+            }
+            getConservationDetails();
+    },[newMessageFlag])
 
     const getUser = async()=>{
         setPerson(user);
@@ -32,9 +49,12 @@ const Conversation = ({user}) =>{
             <Box>
                 <Image src={user.picture} alt="dp"/>
             </Box>
-            <Box>
-                <Box>
+            <Box style={{width:'100%'}}>
+                <Container>
                     <Typography>{user.name}</Typography>
+                </Container>
+                <Box>
+                    <Text>{message?.text?.includes('localhost')? 'media' : message.text}</Text>
                 </Box>
             </Box>
         </Component>
