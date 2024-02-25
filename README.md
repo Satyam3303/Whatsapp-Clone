@@ -1,3 +1,8 @@
+A whatsapp clone application made on MERN Stack. React and Material UI used for Frontend. Node and
+Express used for Backend and MongoDB is used for Backend. Implemented Socket.io for real-time message
+exchange
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
